@@ -1,0 +1,16 @@
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\bin\Debug\net8.0\GolBet.Repositories.deps.json
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\bin\Debug\net8.0\GolBet.Repositories.dll
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\bin\Debug\net8.0\GolBet.Repositories.pdb
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\bin\Debug\net8.0\GolBet.Entities.dll
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\bin\Debug\net8.0\GolBet.Entities.pdb
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.csproj.AssemblyReference.cache
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.AssemblyInfoInputs.cache
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.AssemblyInfo.cs
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.sourcelink.json
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.R.A7B66308.Up2Date
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.dll
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\refint\GolBet.Repositories.dll
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\GolBet.Repositories.pdb
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Repositories\obj\Debug\net8.0\ref\GolBet.Repositories.dll
