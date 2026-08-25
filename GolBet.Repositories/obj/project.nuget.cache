@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "3ILuAQxY8Hw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\saimon.UOW\\OneDrive\\Documents\\ITM\\2026\\2026-2\\software\\GolBet-1\\GolBet.Repositories\\GolBet.Repositories.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\saimon.UOW\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.30\\microsoft.netcore.app.ref.8.0.30.nupkg.sha512",
+    "C:\\Users\\saimon.UOW\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.30\\microsoft.windowsdesktop.app.ref.8.0.30.nupkg.sha512",
+    "C:\\Users\\saimon.UOW\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.30\\microsoft.aspnetcore.app.ref.8.0.30.nupkg.sha512"
+  ],
+  "logs": []
+}
