@@ -10,3 +10,4 @@ C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.
 C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Entities\obj\Debug\net8.0\refint\GolBet.Entities.dll
 C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Entities\obj\Debug\net8.0\GolBet.Entities.pdb
 C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Entities\obj\Debug\net8.0\ref\GolBet.Entities.dll
+C:\Users\saimon.UOW\OneDrive\Documents\ITM\2026\2026-2\software\GolBet-1\GolBet.Entities\obj\Debug\net8.0\GolBet.Entities.csproj.AssemblyReference.cache
