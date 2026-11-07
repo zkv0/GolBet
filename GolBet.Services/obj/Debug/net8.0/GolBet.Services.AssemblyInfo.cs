@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GolBet.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4debfa52d329784c1dd8e09d6417803d202369d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc763f4c7a8705d843fd9565682c2f228df87d73")]
 [assembly: System.Reflection.AssemblyProductAttribute("GolBet.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GolBet.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
