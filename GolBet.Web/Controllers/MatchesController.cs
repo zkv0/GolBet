@@ -15,14 +15,13 @@ public class MatchesController : Controller
     private readonly ITeamService _teamService; 
 
     public MatchesController(IMatchService matchService, ITeamService teamService)
-        {
-            _matchService = matchService;
-            _teamService = teamService;
-        }
+    {
+        _matchService = matchService;
+        _teamService = teamService;
+    }
 
     // GET /Matches                 -> all matches
     // GET /Matches?status=Scheduled -> filtered board
-
     public async Task<IActionResult> Index(MatchStatus? status, string? search)
     {
         ViewBag.CurrentStatus = status;
@@ -30,7 +29,6 @@ public class MatchesController : Controller
         var board = await _matchService.GetBoardAsync(status, search);
         return View(board);
     }
-
 
     // GET /Matches/Detail/3
     public async Task<IActionResult> Detail(int id)
@@ -41,85 +39,143 @@ public class MatchesController : Controller
         return View(match);
     }
 
-// GET /Matches/Create
-[Authorize(Roles = DbSeeder.AdminRole)] 
-public async Task<IActionResult> Create()
-{
-    await LoadTeamsAsync();
-    return View(new MatchFormDto());
-}
-[Authorize(Roles = DbSeeder.AdminRole)] 
-[HttpPost, ValidateAntiForgeryToken]
-public async Task<IActionResult> Create(MatchFormDto dto)
-{
-    if (!ModelState.IsValid)
+    // GET /Matches/Create
+    [Authorize(Roles = DbSeeder.AdminRole)] 
+    public async Task<IActionResult> Create()
     {
         await LoadTeamsAsync();
+        return View(new MatchFormDto());
+    }
+
+    [Authorize(Roles = DbSeeder.AdminRole)] 
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(MatchFormDto dto)
+    {
+        if (!ModelState.IsValid)
+        {
+            await LoadTeamsAsync();
+            return View(dto);
+        }
+
+        try
+        {
+            await _matchService.CreateAsync(dto);
+            TempData["Success"] = "Partido creado correctamente.";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException ex) // business rule violated
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            await LoadTeamsAsync();
+            return View(dto);
+        }
+    }
+
+    // GET /Matches/Edit/5
+    [Authorize(Roles = DbSeeder.AdminRole)] 
+    public async Task<IActionResult> Edit(int id)
+    {
+        var dto = await _matchService.GetForEditAsync(id);
+        if (dto is null) return NotFound();
+
+        await LoadTeamsAsync(); // the form needs the dropdowns too
         return View(dto);
     }
 
-    try
+    // POST /Matches/Edit
+    [Authorize(Roles = DbSeeder.AdminRole)] 
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(MatchFormDto dto)
     {
-        await _matchService.CreateAsync(dto);
-        TempData["Success"] = "Partido creado correctamente.";
+        if (!ModelState.IsValid)
+        {
+            await LoadTeamsAsync();
+            return View(dto);
+        }
+
+        try
+        {
+            await _matchService.UpdateAsync(dto);
+            TempData["Success"] = "Partido actualizado correctamente.";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException ex) // business rule violated
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            await LoadTeamsAsync();
+            return View(dto);
+        }
+    }
+
+    // POST /Matches/Deactivate/5
+    [Authorize(Roles = DbSeeder.AdminRole)] 
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Deactivate(int id)
+    {
+        await _matchService.DeactivateAsync(id);
+        TempData["Success"] = "Partido desactivado.";
         return RedirectToAction(nameof(Index));
     }
-    catch (InvalidOperationException ex) // business rule violated
+
+    // POST /Matches/Start/5
+    [HttpPost, ValidateAntiForgeryToken]
+    [Authorize(Roles = DbSeeder.AdminRole)]
+    public async Task<IActionResult> Start(int id)
     {
-        ModelState.AddModelError(string.Empty, ex.Message);
-        await LoadTeamsAsync();
-        return View(dto);
-    }
-}
+        try
+        {
+            await _matchService.StartMatchAsync(id);
+            TempData["Success"] = "¡Partido en juego! Las apuestas quedaron cerradas.";
+        }
+        catch (InvalidOperationException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
 
-// GET /Matches/Edit/5
-[Authorize(Roles = DbSeeder.AdminRole)] 
-public async Task<IActionResult> Edit(int id)
-{
-    var dto = await _matchService.GetForEditAsync(id);
-    if (dto is null) return NotFound();
-
-    await LoadTeamsAsync(); // the form needs the dropdowns too
-    return View(dto);
-}
-
-// POST /Matches/Edit
-[Authorize(Roles = DbSeeder.AdminRole)] 
-[HttpPost, ValidateAntiForgeryToken]
-public async Task<IActionResult> Edit(MatchFormDto dto)
-{
-    if (!ModelState.IsValid)
-    {
-        await LoadTeamsAsync();
-        return View(dto);
+        return RedirectToAction(nameof(Detail), new { id });
     }
 
-    try
+    // GET /Matches/Close/5  -> the score form
+    [Authorize(Roles = DbSeeder.AdminRole)]
+    public async Task<IActionResult> Close(int id)
     {
-        await _matchService.UpdateAsync(dto);
-        TempData["Success"] = "Partido actualizado correctamente.";
-        return RedirectToAction(nameof(Index));
+        var match = await _matchService.GetDetailAsync(id);
+        if (match is null) return NotFound();
+
+        ViewBag.Match = match;   // header data for the view
+        return View(new MatchResultFormDto { MatchId = id });
     }
-    catch (InvalidOperationException ex) // business rule violated
+
+    // POST /Matches/Close  -> close and resolve
+    [HttpPost, ValidateAntiForgeryToken]
+    [Authorize(Roles = DbSeeder.AdminRole)]
+    public async Task<IActionResult> Close(MatchResultFormDto dto)
     {
-        ModelState.AddModelError(string.Empty, ex.Message);
-        await LoadTeamsAsync();
-        return View(dto);
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Match = await _matchService.GetDetailAsync(dto.MatchId);
+            return View(dto);
+        }
+
+        try
+        {
+            var summary = await _matchService.CloseMatchAsync(dto);
+            TempData["Success"] =
+                $"Partido cerrado {dto.HomeGoals}-{dto.AwayGoals}. " +
+                $"{summary.ResolvedBets} apuestas resueltas: {summary.WonBets} ganadas, " +
+                $"{summary.TotalPaid:N0} FutCoins pagados.";
+        }
+        catch (InvalidOperationException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
+
+        return RedirectToAction(nameof(Detail), new { id = dto.MatchId });
+    }
+
+    private async Task LoadTeamsAsync()
+    {
+        var teams = await _teamService.GetAllAsync();
+        ViewBag.Teams = new SelectList(teams, "Id", "Name");
     }
 }
-
-// POST /Matches/Deactivate/5
-[Authorize(Roles = DbSeeder.AdminRole)] 
-[HttpPost, ValidateAntiForgeryToken]
-public async Task<IActionResult> Deactivate(int id)
-{
-    await _matchService.DeactivateAsync(id);
-    TempData["Success"] = "Partido desactivado.";
-    return RedirectToAction(nameof(Index));
-}
-
-private async Task LoadTeamsAsync()
-{
-    var teams = await _teamService.GetAllAsync();
-    ViewBag.Teams = new SelectList(teams, "Id", "Name");
-}}

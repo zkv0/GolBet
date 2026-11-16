@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GolBet.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc763f4c7a8705d843fd9565682c2f228df87d73")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+964047ac84d246056aec98949e7145bae78c1d91")]
 [assembly: System.Reflection.AssemblyProductAttribute("GolBet.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GolBet.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
